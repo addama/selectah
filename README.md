@@ -85,7 +85,7 @@ All functions that don't return a straight value are chainable.
   <dd>Example: `$('input').text('Oh god please help')`, `$('input').text()`</dd>
     
   <dt>`.find([ string selector ])`</dt>
-  <dd>Attempts to find child nodes of the first selected element that match the given selector. It does not currently have the power to find children based on nodes themselves, just selectors. Sorry. If no selector is given, it behaves just like `.children()`.</dd>
+  <dd>Attempts to find child nodes of the first selected element that match the given selector. If no selector is given, it behaves just like `.children()`. Why you'd do that, I don't know, but it makes sense.</dd>
   <dd>Example: `$('div#haystack').find('#needle')`, `$('div#haystack').find()`</dd>
     
   <dt>`.html([ mixed value ])`</dt>
