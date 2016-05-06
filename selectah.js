@@ -91,6 +91,10 @@ core.prototype = {
 		return (!this.length) ? false : $(this[0]);
 	},
 	
+	last: function() {
+		return (!this.length) ? false : $(this[this.length-1]);
+	},
+	
 	each: function(fn=0) {
 		if (!this.length || !fn) return;
 		var res;
@@ -110,7 +114,7 @@ core.prototype = {
 		return this;
 	},
 	
-	hasClass: function(str=0) {
+	hasClass: function(str=0) { 
 		if (!this.length || !str) return;
 		if (this[0].classList) return this[0].classList.contains(str);
 		else return new Regexp('(^| )'+string+'( |$)', 'gi').test(this[0].className);
