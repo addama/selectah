@@ -1,17 +1,17 @@
 # selectah.js
 Small no-frills jQuery clone. Why? Because I can. Unminified but mostly golfed, it's currently about 8.25kb. Compare to 84kb for minified jQuery.
 
-# What haven't you stolen from jQuery?
+## What haven't you stolen from jQuery?
 .fadeIn(), .fadeOut(), .before(), .after(), .insertAfter(), .insertBefore(), $.htmlPrefilter(), .replaceAll(), .replaceWith(), .unwrap(), .wrap(), .wrapAll(), .wrapInner(), .add(), .addBack(), .andSelf(), .closest(), .contents(), .end(), .filter(), .has(), .map(), .next(), .nextAll(), .nextUntil(), .not(), .offsetParent(), .parents(), .prev(), .prevAll(), .prevUntil(), .slice(), .clearQueue(), .dequeue(), $.dequeue(), $.hasData(), $.queue(), .queue(), .removeData(), $.removeData(), .outerHeight(), .outerWidth(), .innerHeight(), .innerWidth(), .scrollLeft(), .scrollRight(), .scrollTop(), .animate(), .data(), .get(), .index(), $.param(), .toArray(), .serialize(), .serializeArray(), $.get(), $.getJSON(), $.getScript(), .prop(), .removeProp(), .removeAttr(), any AJAX function, any deferred/promise functions, any animation/effect function, any shorthand event handler function (.click(), .blur(), etc), some CSS3 selector support, and probably more but I'm tired of scrolling through jQuery's site. 
 
-# Why weren't these included? What kind of programmer are you that you don't use, uh, like, $.removeData(), which is just SO important in MY very specific application???
+## Why weren't these included? What kind of programmer are you that you don't use, uh, like, $.removeData(), which is just SO important in MY very specific application???
 I have a guess that the vast majority of people using jQuery only use it for 2 things: simple selections using simple selectors, and performing up to 2 physical, chained actions on a selected set of elements. Binding event handlers, showing and hiding elements, adjusting CSS, looping through a bunch of elements to perform a check on each one, etc. 
 
 If that's all you're using jQuery for, plus or minus a few features listed above, why not JUST have those functions available? Why include the entire 84kb of minified jQuery? If you need promises or CSS animation, there are far more efficient and comprehensive libraries that can wrap that all up for you.
 
 If at the end of the day, you still need some of the stuff above, you have 2 options as I see it. First, you can get off your lazy ass and figure out the handful of lines required to do your task. It all boils down to Javascript, a language you presumably know since you ended up here. It can't be that hard, man. Secondly, just use jQuery! No one would fault you for using a larger toolkit, especially an industry standard like jQuery.
 
-# Okay but -
+## Okay but -
 And another thing: have you actually looked at jQuery's source? Like, really _looked_ at it to try and ~~steal~~understand their functions? Most of it is redundant. Most of it is wrappers around wrappers around wrappers. It's a huge mess representing years of compatibility, polyfill, changing design choices, and new technologies. In the end, all of that impressive technology is just doing basic Javascript back there somewhere. Javascript that you know, and would probably facepalm if you could only peel away all the layers to discover it. Javascript that, maybe with some adjustments or a polyfill here and there, works in all browsers. 
 
 # What it do
@@ -177,13 +177,13 @@ All functions that don't return a straight value are chainable.
   <dd>Example: `$('<li>Cutter</li>').prependTo('#line')`</dd>
 
 
-# Will you ever add `/([?]?\.(\w+))\(\)$/` to your thing? 
+## Will you ever add `/([?]?\.(\w+))\(\)$/` to your thing? 
 Yeah, sure man. Things like .closest() and .serialize() are pretty useful, but I considered them outside of the toolkit I was currently building. They might even be in there on the next push, who knows. If you (or I, to myself) can give me a solid reason why your favorite function should make my library fatter and less efficient than it already is, I'll give it a thought.
 
-# Where's my `/\.fade[Out|In]\(\)$/`, man?
+## Where's my `/\.fade[Out|In]\(\)$/`, man?
 The way jQuery does its animations, even the basic ones, would require more bloat than I'm willing to take on currently. I would suggest doing what you're _supposed_ to be doing and use CSS animations via adding and removing classes.
 
-# It's broken, like my self-worth!
+## It's broken, like my self-worth!
 I would love to hear about it! I'm a lazy tester, and want this to work exactly how you think it should based on your experience with jQuery equivalent functions.
 
 # You are bad
