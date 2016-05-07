@@ -88,11 +88,11 @@ core.prototype = {
 	},
 	
 	first: function() {
-		return (!this.length) ? false : $(this[0]);
+		return (!this.length) ? undefined : $(this[0]);
 	},
 	
 	last: function() {
-		return (!this.length) ? false : $(this[this.length-1]);
+		return (!this.length) ? undefined : $(this[this.length-1]);
 	},
 	
 	each: function(fn=0) {
@@ -166,7 +166,7 @@ core.prototype = {
 	},
 	
 	children: function() {
-		return (!this.length) ? false: $(Array.prototype.slice.call(this[0].children), this[0]);
+		return (!this.length) ? undefined: $(Array.prototype.slice.call(this[0].children), this[0]);
 	},
 
 	attr: function(str=0, val=null) {
