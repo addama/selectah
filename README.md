@@ -177,10 +177,10 @@ All functions that don't return a straight value are chainable.
   <dd>Example: `$('<li>Cutter</li>').prependTo('#line')`</dd>
 
 
-# Will you ever add /([?]?\.(\w+))\(\)$/ to your thing? 
+# Will you ever add `/([?]?\.(\w+))\(\)$/` to your thing? 
 Yeah, sure man. Things like .closest() and .serialize() are pretty useful, but I considered them outside of the toolkit I was currently building. They might even be in there on the next push, who knows. If you (or I, to myself) can give me a solid reason why your favorite function should make my library fatter and less efficient than it already is, I'll give it a thought.
 
-# Where's my `\.fade[Out|In]\(\)`, man?
+# Where's my `/\.fade[Out|In]\(\)$/`, man?
 The way jQuery does its animations, even the basic ones, would require more bloat than I'm willing to take on currently. I would suggest doing what you're _supposed_ to be doing and use CSS animations via adding and removing classes.
 
 # It's broken, like my self-worth!
