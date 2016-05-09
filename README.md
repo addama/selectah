@@ -1,25 +1,20 @@
 # selectah.js
 Small no-frills jQuery clone. Why? Because I can. Unminified but mostly golfed, it's currently about 8.25kb. Compare to 84kb for minified jQuery.
 
-## What haven't you stolen from jQuery?
+## Not ~~stolen~~ported from jQuery
 .fadeIn(), .fadeOut(), .before(), .after(), .insertAfter(), .insertBefore(), $.htmlPrefilter(), .replaceAll(), .replaceWith(), .unwrap(), .wrap(), .wrapAll(), .wrapInner(), .add(), .addBack(), .andSelf(), .closest(), .contents(), .end(), .filter(), .has(), .map(), .next(), .nextAll(), .nextUntil(), .not(), .offsetParent(), .parents(), .prev(), .prevAll(), .prevUntil(), .slice(), .clearQueue(), .dequeue(), $.dequeue(), $.hasData(), $.queue(), .queue(), .removeData(), $.removeData(), .outerHeight(), .outerWidth(), .innerHeight(), .innerWidth(), .scrollLeft(), .scrollRight(), .scrollTop(), .animate(), .data(), .get(), .index(), $.param(), .toArray(), .serialize(), .serializeArray(), $.get(), $.getJSON(), $.getScript(), .prop(), .removeProp(), .removeAttr(), any AJAX function, any deferred/promise functions, any animation/effect function, any shorthand event handler function (.click(), .blur(), etc), some CSS3 selector support, and probably more but I'm tired of scrolling through jQuery's site. 
 
-## Why weren't these included? What kind of programmer are you that you don't use, uh, like, $.removeData(), which is just SO important in this very specific situation I just came up with???
-I have a guess that the vast majority of people using jQuery only use it for 2 things: simple selections using simple selectors, and performing a handful of specific chained actions on a selected set of elements. Binding event handlers, showing and hiding elements, adjusting CSS, looping through a bunch of elements to perform a check on each one, etc. 
+## Why weren't these included? 
+I have a guess that the vast majority of people using jQuery only use it for 2 things: simple selections using simple selectors, and performing a handful of specific chained actions on those selections. Binding event handlers, showing and hiding elements, adjusting CSS, looping through a bunch of elements to perform a check on each one, etc. The functions listed above are certainly useful (particularly the animation and promise sections), but are outside of what a basic DOM selection and manipulation library should have.
 
-If that's all you're using jQuery for, plus or minus a few features listed above, why not JUST have those functions available? Why include the entire 84kb of minified jQuery? If you need promises or CSS animation, there are far more efficient and comprehensive libraries that can wrap that all up for you.
+For example, animating CSS properties is more efficiently done, and arguably more "modern" if not _correct_, using CSS animations applied with classes. Promises are built in to Javascript, and are being sugared in ES6. All you really need there are a few functions to replicate jQuery's chaining interface. The rest are convenience functions that either trade one vanilla JS line for a slightly shorter jQuery-flavored line (actually, trading one line of typed code for about 80-ish lines of wrappers surrounding 1 line of vanilla JS), or are conceptual features that may have a place somewhere, but are ultimately just fluff. If you're processing your DOM elements one a time like you're working on a tape machine (`.prev()`, `.next()`, etc), I'm sure you have your reasons, but there are far better and more efficient ways to do what you're doing.
 
-If at the end of the day, you still need some of the stuff above, you have 2 options as I see it. First, you can get off your lazy ass and figure out the handful of lines required to do your task. It all boils down to Javascript, a language you presumably know since you ended up here. It can't be that hard, man. Secondly, just use jQuery! No one would fault you for using a larger toolkit, especially an industry standard like jQuery.
-
-## Okay but -
-And another thing: have you actually looked at jQuery's source? Like, really _looked_ at it to try and ~~steal~~understand their functions? Most of it is redundant. Most of it is wrappers around wrappers around wrappers. It's a huge mess representing years of compatibility, polyfill, changing design choices, and new technologies. In the end, all of that impressive technology is just doing basic Javascript back there somewhere. Javascript that you know, and would probably facepalm if you could only peel away all the layers to discover it. Javascript that, maybe with some adjustments or a polyfill here and there, works in all browsers. 
-
-# What it do
-All functions return undefined (or false if I golfed too hard) if you don't give them their required arguments.
+# Functions
+All functions return `undefined` if you don't give them their required arguments.
 
 All functions return a copy of the object itself, like jQuery, unless you've asked for a specific value from those elements, or have asked to change the set of elements. In any case, you're either getting a $(), a boolean, or a value.
 
-All functions that don't return a straight value are chainable.
+All functions that don't return a value are chainable.
 
 <dl>
   <dt>`.on(string event, function handler)`</dt>
@@ -176,15 +171,17 @@ All functions that don't return a straight value are chainable.
   <dd>Prepends the selected element(s) to the given Node(s), like `.prepend()` but the other way.</dd>
   <dd>Example: `$('<li>Cutter</li>').prependTo('#line')`</dd>
 
+## Issues
+My goal, like most jQuery replacements, is for the library to feel like jQuery so that you're not lost trying to figure out how to do it "my" way. If what selectah does doesn't line up with jQuery, or there are errors, please let me know. Additionally, if I have misjudged the use cases for some of the discluded functions, I encourage you to present your case. The only exception to this is CSS animations - the bloat required to replicate jQuery's animation engine would defeat the entire purpose of being a smaller alternative.
 
-## Will you ever add `/([?]?\.(\w+))\(\)$/` to your thing? 
-Yeah, sure man. Things like .closest() and .serialize() are pretty useful, but I considered them outside of the toolkit I was currently building. They might even be in there on the next push, who knows. If you (or I, to myself) can give me a solid reason why your favorite function should make my library fatter and less efficient than it already is, I'll give it a thought.
-
-## Where's my `/\.fade[Out|In]\(\)$/`, man?
-The way jQuery does its animations, even the basic ones, would require more bloat than I'm willing to take on currently. I would suggest doing what you're _supposed_ to be doing and use CSS animations via adding and removing classes.
-
-## It's broken, like my self-worth!
-I would love to hear about it! I'm a lazy tester, and want this to work exactly how you think it should based on your experience with jQuery equivalent functions.
-
-# You are bad
-Yes I am :( But I gotta get that paper.
+# Todo
+* `selectah.max.js`: non-golfed, fully commented
+* `selectah.min.js`: fully golfed, non-commented, minimized
+* `.serialize()`, `.replace()`, `.replaceAll()`, and maybe `.closest()`, as these fit into the scope, but didn't make it into the first pass
+ 
+# Other jQuery alternatives
+There are a lot, and mine is just one. If my feature set isn't to your liking, the by-no-means complete list below are pretty great.
+* [Balalaika](https://github.com/finom/balalaika): extended from the Array prototype, includes only the selector, `.on()`, `.off()`, `.is()`, and `.extend()`. See also its even smaller version "bala."
+* [Zepto](http://zeptojs.com/): Has an amazing selection of functions, which are grouped into convenient packages. "Aerogel light", which is not... in any way true, but the important thing is that it _can_ be, if you don't include any of the modules.
+* [Minified](http://minifiedjs.com/api/): Comparable functionality to Zepto, but smaller footprint.
+* [Cash](https://github.com/kenwheeler/cash/): Slightly larger footprint than selectah, slightly larger feature set. Probably what I'd use if I was too lazy to write my own.
