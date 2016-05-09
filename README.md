@@ -1,6 +1,9 @@
 # selectah.js
 Small no-frills jQuery clone. Why? Because I can. Unminified but mostly golfed, it's currently about 8.25kb. Compare to 84kb for minified jQuery.
 
+* *selectah.max.js*: fully commented, no shortcuts, no golfing, not minified
+* *selectah.min.js*: no comments, all the shortcuts I know, fully golfed, minified
+
 ## Not ~~stolen~~ported from jQuery
 .fadeIn(), .fadeOut(), .before(), .after(), .insertAfter(), .insertBefore(), $.htmlPrefilter(), .replaceAll(), .replaceWith(), .unwrap(), .wrap(), .wrapAll(), .wrapInner(), .add(), .addBack(), .andSelf(), .closest(), .contents(), .end(), .filter(), .has(), .map(), .next(), .nextAll(), .nextUntil(), .not(), .offsetParent(), .parents(), .prev(), .prevAll(), .prevUntil(), .slice(), .clearQueue(), .dequeue(), $.dequeue(), $.hasData(), $.queue(), .queue(), .removeData(), $.removeData(), .outerHeight(), .outerWidth(), .innerHeight(), .innerWidth(), .scrollLeft(), .scrollRight(), .scrollTop(), .animate(), .data(), .get(), .index(), $.param(), .toArray(), .serialize(), .serializeArray(), $.get(), $.getJSON(), $.getScript(), .prop(), .removeProp(), .removeAttr(), any AJAX function, any deferred/promise functions, any animation/effect function, any shorthand event handler function (.click(), .blur(), etc), some CSS3 selector support, and probably more but I'm tired of scrolling through jQuery's site. 
 
@@ -175,8 +178,6 @@ All functions that don't return a value are chainable.
 My goal, like most jQuery replacements, is for the library to feel like jQuery so that you're not lost trying to figure out how to do it "my" way. If what selectah does doesn't line up with jQuery, or there are errors, please let me know. Additionally, if I have misjudged the use cases for some of the discluded functions, I encourage you to present your case. The only exception to this is CSS animations - the bloat required to replicate jQuery's animation engine would defeat the entire purpose of being a smaller alternative.
 
 # Todo
-* `selectah.max.js`: non-golfed, fully commented
-* `selectah.min.js`: fully golfed, non-commented, minimized
 * `.serialize()`, `.replace()`, `.replaceAll()`, and maybe `.closest()`, as these fit into the scope, but didn't make it into the first pass
  
 # Other jQuery alternatives
