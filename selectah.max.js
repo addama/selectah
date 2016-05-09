@@ -19,6 +19,15 @@ var selectahListeners = {};
 	}
 	
 	var Selectah = function(selector = false, context = false) {
+		// Selectah can be used in the following ways:
+		// 		Simple selections: $('p'), $('#content > .panel')
+		// 		Element creation: $('<p>Hello</p>'), $('<ul><li>...</li></ul>')
+		// 		Node selection: $($('p').first())
+		// A context can be given to narrow down the number of elements
+		// that it has to search through. Functions that return subsets of
+		// their current selections will often change the context to reflect
+		// this change in... context.
+		
 		if (context) {
 			// We can't guarantee how the context will be delivered,
 			// so we'll feed it through selectah to make it useable
@@ -334,33 +343,13 @@ var selectahListeners = {};
 		},
 
 		hide: function() {
-			// Hides the selected elements
-			// This could easily just be a passthrough to .css('display', 'none'),
-			// but since it's such a simple thing, we'll just do it here
-			if (!this.length) {
-				return undefined;
-			}
-			
-			for (var i = 0; i < this.length; i++) {
-				this[i].style.display = 'none';
-			}
-			
-			return this;
+			// Hides all selected elements. Passthrough to .css('display', 'none')
+			return this.css('display', 'none');
 		},
 		
 		show: function() {
-			// Shows the selected elements
-			// This could easily just be a passthrough to .css('display', ''),
-			// but since it's such a simple thing, we'll just do it here
-			if (!this.length) {
-				return undefined;
-			}
-			
-			for (var i = 0; i < this.length; i++) {
-				this[i].style.display = '';
-			}
-			
-			return this;
+			// Shows the selected elements. Passthrough to .css('display', '')
+			return this.css('display', '');
 		},
 		
 		toggle: function() {
