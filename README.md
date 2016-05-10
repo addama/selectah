@@ -178,7 +178,6 @@ All functions that don't return a value are chainable.
 My goal, like most jQuery replacements, is for the library to feel like jQuery so that you're not lost trying to figure out how to do it "my" way. If what selectah does doesn't line up with jQuery, or there are errors, please let me know. Additionally, if I have misjudged the use cases for some of the discluded functions, I encourage you to present your case. The only exception to this is CSS animations - the bloat required to replicate jQuery's animation engine would defeat the entire purpose of being a smaller alternative.
 
 # Todo
-* Fix `.on()` and `.off()`, which currently only work for uniquely identifiable elements.
 * `.serialize()`, `.replace()`, `.replaceAll()`, and maybe `.closest()`, as these fit into the scope, but didn't make it into the first pass
  
 # Other jQuery alternatives
