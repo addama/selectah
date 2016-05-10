@@ -1,18 +1,4 @@
-// Set up our globals
-var $;
-var selectahListeners = {};
-
-(function() {
-	// Set up the vendor-specific matchesSelector, which is used by .is()
-	if (Element && !Element.prototype.matches) {
-		var proto = Element.prototype;
-		proto.matches = proto.matchesSelector 
-			|| proto.webkitMatchesSelector 
-			|| proto.mozMatchesSelector 
-			|| proto.msMatchesSelector 
-			|| proto.oMatchesSelector;
-	}
-
+var $ = (function(id, selectahListeners) {
 	// Create a new Selectah object with every call to $
 	$ = function(selector, context) { 
 		return new Selectah(selector, context); 
@@ -42,7 +28,7 @@ var selectahListeners = {};
 		this.length = 0;
 		this.selector = selector 
 		this.context = context;
-		
+
 		if (selector) {
 			if (typeof selector === 'object') {
 				// If an array is given, we need to break it apart
@@ -86,16 +72,18 @@ var selectahListeners = {};
 		return this;
 	};
 
-	core.prototype = {
+	Selectah.prototype = {
+		
 		on: function(eventType = false, handler = false) {
 			// Binds a handler to an event for all selected elements
 			// This relationship is currently stored in the global variable 
 			// selectahListeners, which allows us to unbind the same handlers
 			// with .off()
+			// Solution inspired by Balalaika
 			if (!this.length || !eventType || !handler) {
 				return undefined;
 			}
-			
+
 			var events = [];
 			eventType.toLowerCase();
 			
@@ -107,17 +95,20 @@ var selectahListeners = {};
 				});
 			} else {
 				// Even if there's only one item, it'll be an array
-				events.push(event); 
+				events.push(eventType); 
 			}
 			
 			for (var i = 0; i < this.length; i++) {
 				var element = this[i];
+				// Attach a unique ID to the element that will be used to identify it
+				// later. (eventType + UNIQUE_ID => "click33", "hover2", etc)
+				element.s$ = element.s$ || ++id;
 				events.forEach(function(event) {
 					// Here we initialize each step in the selectahListeners tree
 					// so that we don't get "can't access property ____ of undefined"
-					selectahListeners[element] = selectahListeners[element] || {};
-					selectahListeners[element][event] = selectahListeners[element][event] || [];
-					selectahListeners[element][event].push(fn);
+					var identifier = event + element.s$;
+					selectahListeners[identifier] = selectahListeners[identifier] || [];
+					selectahListeners[identifier].push(handler);
 					// This is what binds the actual handler to the element and event
 					element.addEventListener(event, handler);
 				});
@@ -125,12 +116,13 @@ var selectahListeners = {};
 			
 			return this;	
 		},
-		
+
 		off: function(eventType = false) {
 			// Unbinds all handlers from all selected elements for the given event(s)
 			// This will only unbind event handlers that were registered with .on(),
-			// as any other method will not place the handler in the selectahListener
+			// as any other method will not place the handler in the selectahListeners
 			// catalog
+			// Solution inspired by Balalaika
 			if (!this.length || !eventType) {
 				return undefined;
 			}
@@ -151,24 +143,23 @@ var selectahListeners = {};
 			
 			for (var i = 0; i < this.length; i++) {
 				var element = this[i];
-				if (element in selectahListeners) {
-					events.forEach(function(event) {
-						// For every event, granted the element has been found to it,
-						// we'll unbind the handler first, then remove that entry from
-						// selectahListeners. In most cases, the element key will remain,
-						// but there shouldn't be any harm in that
-						if (event in selectahListeners[element]) {
-							var handlers = selectahListeners[element][event];
-							for (var j = 0; j < handlers.length; j++) {
-								// Unbind the handler
-								element.removeEventListener(event, handlers[j]);
-							}
-							
-							// Remove the entry from selectahListeners
-							delete selectahListeners[element][event];
+				events.forEach(function(event) {
+					// For every event, granted the element has been found to it,
+					// we'll unbind the handler first, then remove that entry from
+					// selectahListeners. In most cases, the element key will remain,
+					// but there shouldn't be any harm in that
+					var identifier = event + element.s$;
+					if (identifier in selectahListeners) {
+						var handlers = selectahListeners[identifier];
+						for (var j = 0; j < handlers.length; j++) {
+							// Unbind the handler
+							element.removeEventListener(event, handlers[j]);
 						}
-					})
-				}
+						
+						// Remove the entry from selectahListeners
+						delete selectahListeners[identifier];
+					}
+				})
 			}
 			
 			return this;
@@ -178,11 +169,11 @@ var selectahListeners = {};
 			// Sets the given CSS rule to the given value in the given units for all
 			// selected elements, if all of those things are given. If no value is given,
 			// it returns the value of that CSS rule for the first selected element only
-			if (!this.length || (!rule && !value)) {
+			if (!this.length || (!rule && (!value && value !== ''))) {
 				return undefined;
 			}
 			
-			if (rule && !value) {
+			if (rule && (!value && value !== '')) {
 				// Here we get the current style rules for the first element
 				// and return the one being asked for
 				var style = getComputedStyle(this[0], null);
@@ -478,10 +469,15 @@ var selectahListeners = {};
 			
 			if (typeof value === 'object') {
 				// Compare the two objects
+				if (value.length >= 1) value = value[0];
 				return this[0] === value;
 			} else {
 				// The common case, which uses the built in matchesSelector 
-				return this[0].matches(value);
+				return (this[0].matches 
+					|| this[0].webkitMatchesSelector 
+					|| this[0].mozMatchesSelector
+					|| this[0].msMatchesSelector
+					|| this[0].oMatchesSelector).call(this[0], value);
 			}
 		},
 
@@ -772,4 +768,5 @@ var selectahListeners = {};
 			return this;
 		},
 	}
-})();
+	return $;
+})(0, {});
