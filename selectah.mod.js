@@ -109,7 +109,7 @@ var $=(function(id,sl){
 		removeClass:function(cn=!1){
 			if(!this[l]||!cn)return uu;			
 			for(var i=0;i<this[l];i++){
-				if(this[i].classList)this[i].classList.remove(cn)}
+				if(this[i].classList){this[i].classList.remove(cn)}
 				else{
 					var cs=cn.split(' ').join('|');
 					var r=new RegExp('(^| )'+cs+'( |$)','gi');
