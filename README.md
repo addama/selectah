@@ -1,8 +1,9 @@
 # selectah.js
-Small no-frills jQuery clone. Why? Because I can. Golfed and minified, it's currently just over 6kb, and even less when gzipped. Compare to 84kb for minified jQuery.
+Small no-frills jQuery clone. Why? Because I can. Golfed and minified, it's currently just about 6kb, and even less when gzipped. Compare to 84kb for minified jQuery.
 
-* *selectah.max.js* (22.6kb): fully commented, no shortcuts, no golfing, not minified
-* *selectah.min.js* (6.09kb): no comments, all the shortcuts I know, fully golfed, minified
+* *selectah.max.js* (21.9kb): fully commented, no shortcuts, no golfing, not minified
+* *selectah.mod.js* (7.12kb): no comments, fully golfed, but still tabbed out so you can get line numbers if errors occur
+* *selectah.min.js* (5.93kb): no comments, all the shortcuts I know, fully golfed, minified
 
 ## Not ~~stolen~~ported from jQuery
 .fadeIn(), .fadeOut(), .before(), .after(), .insertAfter(), .insertBefore(), $.htmlPrefilter(), .replaceAll(), .replaceWith(), .unwrap(), .wrap(), .wrapAll(), .wrapInner(), .add(), .addBack(), .andSelf(), .closest(), .contents(), .end(), .filter(), .has(), .map(), .next(), .nextAll(), .nextUntil(), .not(), .offsetParent(), .parents(), .prev(), .prevAll(), .prevUntil(), .slice(), .clearQueue(), .dequeue(), $.dequeue(), $.hasData(), $.queue(), .queue(), .removeData(), $.removeData(), .outerHeight(), .outerWidth(), .innerHeight(), .innerWidth(), .scrollLeft(), .scrollRight(), .scrollTop(), .animate(), .data(), .get(), .index(), $.param(), .toArray(), .serialize(), .serializeArray(), $.get(), $.getJSON(), $.getScript(), .prop(), .removeProp(), .removeAttr(), any AJAX function, any deferred/promise functions, any animation/effect function, any shorthand event handler function (.click(), .blur(), etc), some CSS3 selector support, and probably more but I'm tired of scrolling through jQuery's site. 
